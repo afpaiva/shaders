@@ -11,7 +11,7 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.z = 5;
 
 // material stores uniforms 
-const material = new THREE.RawShaderMaterial({
+const material = new THREE.ShaderMaterial({
     vertexShader,
     fragmentShader
 })
@@ -19,7 +19,7 @@ material.uniforms.myValue = { value: 0 };
 console.log(material.uniforms)
 
 // geometry stores attributes
-const geometry = new THREE.SphereGeometry();
+const geometry = new THREE.TorusKnotGeometry();
 console.log(geometry.attributes) // -> position, normal, uv
 
 const mesh = new THREE.Mesh(geometry, material);
