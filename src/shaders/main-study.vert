@@ -20,7 +20,7 @@ flat varying vec2 vUv;
 
 void main() {
     // modelViewMatrix = viewMatrix * modelMatrix;
-    // MVP -> Model View Projection
+    // MVP -> Model View Projection - https://jsantell.com/model-view-projection/
     vec4 modelViewPosition =  modelViewMatrix * vec4(position, 1.0);
     vec4 projectedPosition = projectionMatrix * modelViewPosition;
     gl_Position = projectedPosition;

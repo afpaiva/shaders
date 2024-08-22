@@ -8,5 +8,5 @@ flat varying vec2 vUv;
 
 void main(){
     // creates a simple gradient
-    gl_FragColor = vec4(vUv.xxx, 1);
+    gl_FragColor = vec4(vUv, 1, 1);
 }
