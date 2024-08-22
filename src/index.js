@@ -1,11 +1,6 @@
 import * as THREE from "three"
-import vertexShader from "./shaders/main-study.vert" 
-import fragmentShader from "./shaders/main-study.frag" 
-
-const material = new THREE.ShaderMaterial({
-    vertexShader,
-    fragmentShader
-})
+import vertexShader from "./shaders/main-study.vert"
+import fragmentShader from "./shaders/main-study.frag"
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -15,7 +10,18 @@ camera.position.z = 5;
 const renderer = new THREE.WebGLRenderer();
 renderer.setAnimationLoop(animate)
 
-const geometry = new THREE.BoxGeometry();
+// material stores uniforms 
+const material = new THREE.RawShaderMaterial({
+    vertexShader,
+    fragmentShader
+})
+material.uniforms.myValue = { value: 0 };
+console.log(material.uniforms)
+
+// geometry stores attributes
+const geometry = new THREE.SphereGeometry();
+console.log(geometry.attributes) // -> position, normal, uv
+
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
