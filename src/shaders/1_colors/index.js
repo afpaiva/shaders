@@ -1,9 +1,14 @@
 import { VertexNormalsHelper } from 'three/addons/helpers/VertexNormalsHelper.js';
 import * as THREE from "three"
-import vertexShader from "./warmup.glsl.vert"
-import fragmentShader from "./warmup.glsl.frag"
+import vertexShader from "./colors.glsl.vert"
+import fragmentShader from "./colors.glsl.frag"
+import { Color } from 'three';
 
-export const warmup = () => {
+/**
+ * This study is to show how to use THREE.ShaderMaterial focusing on
+ * sending values from uniforms to fragment shader and applying a color
+ */
+export const colors = () => {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(
     75, window.innerWidth / window.innerHeight, .2, 1000
@@ -15,18 +20,14 @@ export const warmup = () => {
     vertexShader,
     fragmentShader
   })
-  material.uniforms.myValue = { value: 0 };
-  console.log(material.uniforms)
+  const uniformColor = new Color(0xff0077);
+  material.uniforms.uColor = { value: uniformColor };
 
   // geometry stores attributes
   const geometry = new THREE.TorusKnotGeometry();
-  console.log(geometry.attributes) // -> position, normal, uv
 
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
-
-  const vertexNormalsHelper = new VertexNormalsHelper(mesh, .2, 0xff0000);
-  mesh.add(vertexNormalsHelper);
 
   const ambientLight = new THREE.AmbientLight();
   scene.add(ambientLight)
