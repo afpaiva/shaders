@@ -24,7 +24,7 @@ export const posNormalUv = () => {
   material.uniforms.uColor = { value: uniformColor };
 
   // geometry stores attributes
-  const geometry = new THREE.PlaneGeometry(2, 2);
+  const geometry = new THREE.PlaneGeometry(2, 2, 10, 10);
 
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
