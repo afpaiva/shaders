@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>webgl-3d-viewer</title>
+  <style>
+    body {
+      background-color: darkblue;
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      margin: auto;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <script src="./main.js"></script>
+  <script src="./shaderUtil.js"></script>
+  <script>
+    var glInstance;
+    window.addEventListener("load", function () {
+      // Create a new GLInstance for the canvas
+      glInstance = new GLInstance("canvas").fSetSize(500, 500).fClear();
+      const { gl } = glInstance; // Get the WebGL context
+
+      // Load vertex and fragment shader source code
+      const vShaderTxt = ShaderUtil.domShaderSrc("vertex-shader");
+      const fShaderTxt = ShaderUtil.domShaderSrc("fragment-shader");
+      // Create shaders
+      const vShader = ShaderUtil.createShader(gl, vShaderTxt, gl.VERTEX_SHADER);
+      const fShader = ShaderUtil.createShader(gl, fShaderTxt, gl.FRAGMENT_SHADER);
+      // Create a shader program
+      const shaderProg = ShaderUtil.createProgram(gl, vShader, fShader, true);
+
+      gl.useProgram(shaderProg); // Use the shader program
+      const aPositionLoc = gl.getAttribLocation(shaderProg, "aPosition"); // Get attribute location
+      const uPointSizeLoc = gl.getUniformLocation(shaderProg, "uPointSize"); // Get uniform location
+      gl.useProgram(null); // Unbind the shader program
+
+      // Define vertex positions
+      const aryVerts = new Float32Array([0, 0, 0, 0.5, 0.5, 0]);
+      const bufVerts = gl.createBuffer(); // Create a buffer for vertex data
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufVerts); // Bind the buffer
+      gl.bufferData(gl.ARRAY_BUFFER, aryVerts, gl.STATIC_DRAW); // Upload vertex data to the buffer
+      gl.bindBuffer(gl.ARRAY_BUFFER, null); // Unbind the buffer
+
+      gl.useProgram(shaderProg); // Rebind the shader program
+      gl.uniform1f(uPointSizeLoc, 50.0); // Set the point size uniform
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, bufVerts); // Bind the vertex buffer
+      gl.enableVertexAttribArray(aPositionLoc); // Enable the vertex attribute
+      gl.vertexAttribPointer(aPositionLoc, 3, gl.FLOAT, false, 0, 0); // Specify how to read the vertex data
+      gl.bindBuffer(gl.ARRAY_BUFFER, null); // Unbind the buffer
+
+      gl.drawArrays(gl.POINTS, 0, 2); // Draw the points
+    })
+  </script>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script id="vertex-shader" type="x-shader/x-vertex">#version 300 es
+    in vec3 aPosition;
+
+    uniform float uPointSize;
+
+    void main(void){
+      gl_PointSize = uPointSize; // Set the size of the point
+      gl_Position = vec4(aPosition, 1.0); // Set the position of the vertex
+    }
+  </script>
+  <script id="fragment-shader" type="x-shader/x-fragment">#version 300 es
+    precision mediump float;
+
+    out vec4 finalColor;
+
+    void main(void){
+      finalColor = vec4(0.0, 1.0, 0.0, 0.0); // Set the color of the fragment
+    }
+  </script>
+</body>
+
+</html>

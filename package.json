@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "webgl": "vite src/webgl",
     "build": "vite build",
     "preview": "vite preview"
   },
