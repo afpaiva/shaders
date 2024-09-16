@@ -52,4 +52,22 @@ class ShaderUtil {
     gl.deleteShader(fShader); // Delete the fragment shader
     return prog; // Return the linked program
   }
+
+  static domShaderProgram(gl, vectId, fragId, doValidate = true) {
+    // Load vertex and fragment shader source code
+    const vShaderTxt = ShaderUtil.domShaderSrc(vectId);
+    if (!vShaderTxt) return null;
+
+    const fShaderTxt = ShaderUtil.domShaderSrc(fragId);
+    if (!fShaderTxt) return null;
+
+    // Create shaders
+    const vShader = ShaderUtil.createShader(gl, vShaderTxt, gl.VERTEX_SHADER);
+    if (!vShader) return null;
+
+    const fShader = ShaderUtil.createShader(gl, fShaderTxt, gl.FRAGMENT_SHADER);
+    if (!fShader) return null;
+
+    return ShaderUtil.createProgram(gl, vShader, fShader, doValidate);
+  }
 }

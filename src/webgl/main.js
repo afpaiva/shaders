@@ -27,5 +27,13 @@ class GLInstance {
     this.gl.viewport(0, 0, w, h); // Set the viewport to match the canvas size
     return this;
   }
+
+  createArrayBuffer(floatArray, isStatic = true) {
+    const buf = this.createBuffer();
+    this.bindBuffer(this.ARRAY_BUFFER, buf); // Bind the buffer
+    this.bufferData(this.ARRAY_BUFFER, floatArray, (isStatic) ? this.STATIC_DRAW : this.DYNAMIC_DRAW); // Upload vertex data to the buffer
+    this.bindBuffer(this.ARRAY_BUFFER, null); // Unbind the buffer
+    return buf;
+  }
 }
 
