@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import gsap from "gsap";
-import { Object3D } from "three";
 
 export const bufferGeometry = () => {// Basic setup of the scene with Three.js
     const scene = new THREE.Scene();
