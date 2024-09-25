@@ -1,3 +1,4 @@
+import { materials } from './materials/index.js';
 import { bufferGeometry } from './mesh/buffer-geometry.js';
 import { warmup } from './shaders/0_warmup/index.js';
 import { colors } from './shaders/1_colors/index.js';
@@ -8,4 +9,5 @@ import { moving } from './shaders/3_moving/index.js';
 // colors();
 // posNormalUv();
 // moving();
-bufferGeometry();
+// bufferGeometry();
+materials();
