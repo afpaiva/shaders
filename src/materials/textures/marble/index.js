@@ -1,16 +1,18 @@
 import * as THREE from 'three';
 
-const map = new THREE.TextureLoader()
+const textureLoader = new THREE.TextureLoader()
+
+const map = textureLoader
     .load("./src/materials/textures/marble/albedo.png")
-const aoMap = new THREE.TextureLoader()
+const aoMap = textureLoader
     .load("./src/materials/textures/marble/ao.png")
-const bumpMap = new THREE.TextureLoader()
+const bumpMap = textureLoader
     .load("./src/materials/textures/marble/height.png")
-const metalnessMap = new THREE.TextureLoader()
+const metalnessMap = textureLoader
     .load("./src/materials/textures/marble/metallic.png")
-const normalMap = new THREE.TextureLoader()
+const normalMap = textureLoader
     .load("./src/materials/textures/marble/normal.png")
-const roughnessMap = new THREE.TextureLoader()
+const roughnessMap = textureLoader
     .load("./src/materials/textures/marble/roughness.png")
 
 export const marbleMaterial = new THREE.MeshStandardMaterial({

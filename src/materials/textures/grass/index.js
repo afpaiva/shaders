@@ -1,16 +1,18 @@
 import * as THREE from 'three';
 
-const map = new THREE.TextureLoader()
+const textureLoader = new THREE.TextureLoader()
+
+const map = textureLoader
     .load("./src/materials/textures/grass/albedo.png")
-const aoMap = new THREE.TextureLoader()
+const aoMap = textureLoader
     .load("./src/materials/textures/grass/ao.png")
-const bumpMap = new THREE.TextureLoader()
+const bumpMap = textureLoader
     .load("./src/materials/textures/grass/height.png")
-const metalnessMap = new THREE.TextureLoader()
+const metalnessMap = textureLoader
     .load("./src/materials/textures/grass/metallic.png")
-const normalMap = new THREE.TextureLoader()
+const normalMap = textureLoader
     .load("./src/materials/textures/grass/normal.png")
-const roughnessMap = new THREE.TextureLoader()
+const roughnessMap = textureLoader
     .load("./src/materials/textures/grass/roughness.png")
 
 export const grassMaterial = new THREE.MeshStandardMaterial({
