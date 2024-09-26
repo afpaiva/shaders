@@ -20,9 +20,9 @@ export const materials = () => {
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
 
-  const ambientLight = new THREE.AmbientLight("lightblue", 1);
+  const ambientLight = new THREE.HemisphereLight("lightblue", "#365726", 1);
 
-  const directLight = new THREE.DirectionalLight("orange", 2);
+  const directLight = new THREE.DirectionalLight("white", 2);
   directLight.position.set(1, 2, 1)
   directLight.castShadow = true;
 
@@ -31,7 +31,7 @@ export const materials = () => {
   sphereMesh.castShadow = true
   sphereMesh.position.set(-1.1, 0, 0)
 
-  const torusGeometry = new THREE.TorusKnotGeometry();
+  const torusGeometry = new THREE.TorusKnotGeometry(1, 0.4, 70, 20);
   const torusMesh = new THREE.Mesh(torusGeometry, marbleMaterial)
   torusMesh.castShadow = true
   torusMesh.position.set(1.7, 0.8, 0)
